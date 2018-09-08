@@ -1,4 +1,6 @@
 # spring_boot_project_todo_sample
+Ejemplo básico de un projecto con spring_boot. Tenemos los recursos Proyecto y Tarea. Tarea es un recurso hijo de Proyecto.
+
 
 ### Pasos para ejecutar:
 
