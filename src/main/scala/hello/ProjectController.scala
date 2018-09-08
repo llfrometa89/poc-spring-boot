@@ -33,7 +33,6 @@ class ProjectController {
     newProject
   }
 
-
   @PutMapping(value = Array("/projects/{projectId}"))
   def update(@PathVariable projectId: String, @RequestBody data: UpdateProjectParameter): ProjectDTO = {
     val newProject = ProjectDTO(projectId, data.name, data.priority)
