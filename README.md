@@ -45,3 +45,19 @@ Obtener un proyecto por id
 
 GET http://localhost:8080/projects/{projectId}
 ```
+
+```
+Eliminar un proyecto por id
+
+DELETE http://localhost:8080/projects/{projectId}
+```
+
+```
+Adicionar una tarea a un proyecto
+
+PUT http://localhost:8080/projects/{projectId}/tasks
+{
+	"name":"MyTask1",
+	"checked":true
+}
+```
