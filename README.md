@@ -63,3 +63,19 @@ PUT http://localhost:8080/projects/{projectId}/tasks
 	"checked":true
 }
 ```
+
+```
+Modificar una tarea
+
+PUT http://localhost:8080/tasks/{taskId}
+{
+	"name":"MyTask3",
+	"checked":true
+}
+```
+
+```
+Eliminar una tarea
+
+DELETE http://localhost:8080/tasks/{taskId}
+```
