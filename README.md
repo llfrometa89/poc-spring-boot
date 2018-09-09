@@ -52,6 +52,8 @@ Eliminar un proyecto por id
 DELETE http://localhost:8080/projects/{projectId}
 ```
 
+1. Tareas:
+
 ```
 Adicionar una tarea a un proyecto
 
