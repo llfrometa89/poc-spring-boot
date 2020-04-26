@@ -12,7 +12,7 @@ class TaskController {
   def create(@PathVariable projectId: String, @RequestBody data: CreateTaskParameter): Optional[ProjectDTO] = {
     projects.find(_.id == projectId) match {
       case Some(project) =>
-        val newTask = TaskDTO(UUID.randomUUID().toString, projectId, data.name, data.checked)
+        val newTask    = TaskDTO(UUID.randomUUID().toString, projectId, data.name, data.checked)
         val newProject = project.withTask(newTask)
         projects = newProject :: projects.filter(_.id != projectId)
         Optional.of(newProject)
@@ -25,9 +25,9 @@ class TaskController {
     val tasks = projects.flatMap(_.tasks.asScala.toList)
     tasks.find(_.id == taskId) match {
       case Some(task) =>
-        val projectId = task.projectId
-        val project = projects.find(_.id == task.projectId).get //TODO .get of Option is for testing only: do not use this operation without checking that there is actually a Some Object
-      val newTask = TaskDTO(task.id, task.projectId, data.name, data.checked)
+        val projectId  = task.projectId
+        val project    = projects.find(_.id == task.projectId).get //TODO .get of Option is for testing only: do not use this operation without checking that there is actually a Some Object
+        val newTask    = TaskDTO(task.id, task.projectId, data.name, data.checked)
         val newProject = project.withTask(newTask)
         projects = newProject :: projects.filter(_.id != projectId)
         Optional.of(newProject)
@@ -38,8 +38,9 @@ class TaskController {
   @DeleteMapping(value = Array("/tasks/{taskId}"))
   def delete(@PathVariable taskId: String): java.util.List[ProjectDTO] = {
     println(s"...........taskId = $taskId")
-    projects = projects.map(project => ProjectDTO(project.id, project.name, project.priority,
-      project.tasks.asScala.toList.filter(_.id != taskId).asJava))
+    projects = projects.map(project =>
+      ProjectDTO(project.id, project.name, project.priority, project.tasks.asScala.toList.filter(_.id != taskId).asJava)
+    )
     projects.asJava
   }
 

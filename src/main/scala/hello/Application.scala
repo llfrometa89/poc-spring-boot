@@ -7,5 +7,5 @@ import org.springframework.boot.autoconfigure._
 class Application
 
 object Application extends App {
-  SpringApplication.run(classOf[Application], args:_*)
+  SpringApplication.run(classOf[Application], args: _*)
 }
