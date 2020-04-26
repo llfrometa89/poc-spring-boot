@@ -8,15 +8,19 @@ import io.github.llfrometa89.domain.models.Project.ProjectNotFound
 import io.github.llfrometa89.domain.models.Task.TaskNotFound
 import io.github.llfrometa89.domain.repositories.{ProjectRepository, TaskRepository}
 
-class TaskService[F[_]: Sync](projectRepository: ProjectRepository[F], taskRepository: TaskRepository[F]) {
+class TaskService[F[_]: Sync](
+    projectRepository: ProjectRepository[F],
+    taskRepository: TaskRepository[F],
+    taskConverter: TaskConverter
+) {
 
   def add(projectId: String, data: CreateTaskDTO): F[TaskDTO] =
     for {
       maybeProject <- projectRepository.findById(projectId)
       project      <- maybeProject.liftTo[F](ProjectNotFound(projectId))
-      task         <- Sync[F].pure(TaskConverter.toModel(data, project))
+      task         <- Sync[F].pure(taskConverter.toModel(data, project))
       taskSaved    <- taskRepository.add(task)
-    } yield TaskConverter.toDTO(taskSaved)
+    } yield taskConverter.toDTO(taskSaved)
 
   def update(taskId: String, data: UpdateTaskDTO): F[TaskDTO] =
     for {
@@ -24,7 +28,7 @@ class TaskService[F[_]: Sync](projectRepository: ProjectRepository[F], taskRepos
       task         <- maybeTask.liftTo[F](TaskNotFound(taskId))
       taskToUpdate <- Sync[F].pure(task.copy(name = data.name, checked = data.checked))
       taskUpdated  <- taskRepository.update(taskToUpdate)
-    } yield TaskConverter.toDTO(taskUpdated)
+    } yield taskConverter.toDTO(taskUpdated)
 
   def remove(taskId: String): F[Unit] =
     for {
@@ -36,13 +40,13 @@ class TaskService[F[_]: Sync](projectRepository: ProjectRepository[F], taskRepos
   def findAll: F[List[TaskDTO]] =
     for {
       tasks <- taskRepository.findAll
-    } yield tasks.map(TaskConverter.toDTO)
+    } yield tasks.map(taskConverter.toDTO)
 
   def findById(taskId: String): F[TaskDTO] =
     for {
       maybeTask <- taskRepository.findById(taskId)
       task      <- maybeTask.liftTo[F](TaskNotFound(taskId))
-    } yield TaskConverter.toDTO(task)
+    } yield taskConverter.toDTO(task)
 
   def toggle(taskId: String): F[TaskDTO] =
     for {
@@ -50,6 +54,6 @@ class TaskService[F[_]: Sync](projectRepository: ProjectRepository[F], taskRepos
       task         <- maybeTask.liftTo[F](TaskNotFound(taskId))
       taskToUpdate <- Sync[F].pure(task.copy(checked = !task.checked))
       taskUpdated  <- taskRepository.update(taskToUpdate)
-    } yield TaskConverter.toDTO(taskUpdated)
+    } yield taskConverter.toDTO(taskUpdated)
 
 }

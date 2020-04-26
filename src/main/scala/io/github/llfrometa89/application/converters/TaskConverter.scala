@@ -5,7 +5,7 @@ import java.util.UUID
 import io.github.llfrometa89.application.dtos.{CreateTaskDTO, TaskDTO}
 import io.github.llfrometa89.domain.models.{Project, Task}
 
-object TaskConverter {
+class TaskConverter {
 
   def toModel(data: CreateTaskDTO, project: Project): Task = Task(
     id = UUID.randomUUID().toString,

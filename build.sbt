@@ -25,7 +25,8 @@ libraryDependencies ++= Seq(
   Libraries.catsEffect,
   Libraries.logbackClassic,
   Libraries.jacksonScala,
-  Libraries.scalaTest
+  Libraries.scalaTest,
+  Libraries.mockitoScala
 )
 
 scalacOptions ++= commonScalacOptions
