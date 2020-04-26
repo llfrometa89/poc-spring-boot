@@ -6,3 +6,8 @@ case class Project(
     priority: Int,
     tasks: List[Task]
 )
+
+object Project {
+  trait ProjectError                            extends Exception
+  case class ProjectNotFound(projectId: String) extends ProjectError
+}

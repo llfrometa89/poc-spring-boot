@@ -1,24 +1,24 @@
 # poc-spring-boot
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aba7bc8bb60b4d0386dbaa85fa071573)](https://www.codacy.com/manual/llfrometa89/poc-spring-boot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=llfrometa89/poc-spring-boot&amp;utm_campaign=Badge_Grade)
 
-Ejemplo básico de un projecto con spring_boot. Tenemos los recursos Proyecto y Tarea. Tarea es un recurso hijo de Proyecto.
+**poc-spring-boot** is a basic example to test many features of Spring Boot library. This example is to manage projects and tasks.
 
+### Requirements
+You need to have a configured environment to run a scala project
 
-### Pasos para ejecutar:
+### Executing the example:
 
-1. Ejecutar en el terminal el siguiente comando:
+```bash
+$ sbt run
+```
+
+### Endpoints
+
+#### Projects
+
+- Add a project
 
 ```
-$  sbt run
-```
-
-### Rutas disponibles por recursos:
-
-1. Proyecto:
-
-```
-Crear proyecto
-
 POST http://localhost:8080/projects
 {
 	"name":"MyProject4",
@@ -26,58 +26,49 @@ POST http://localhost:8080/projects
 }
 ```
 
-```
-Actualizar proyecto
 
+- Update a project
+```
 PUT http://localhost:8080/projects/{projectId}
 {
 	"name":"MyProjectNewName",
 	"priority":6
 }
 ```
-
+- Get all projects
 ```
-Obtener todos los proyectos
-
 GET http://localhost:8080/projects
 ```
 
+- Get a project by identifier
 ```
-Obtener un proyecto por id
-
 GET http://localhost:8080/projects/{projectId}
 ```
 
+- Remove a project by identifier
 ```
-Eliminar un proyecto por id
-
 DELETE http://localhost:8080/projects/{projectId}
 ```
 
-1. Tareas:
+#### Tasks
 
+- Add a task inside a project
 ```
-Adicionar una tarea a un proyecto
-
 PUT http://localhost:8080/projects/{projectId}/tasks
 {
 	"name":"MyTask1",
 	"checked":true
 }
 ```
-
+- Update a task
 ```
-Modificar una tarea
-
 PUT http://localhost:8080/tasks/{taskId}
 {
 	"name":"MyTask3",
 	"checked":true
 }
 ```
-
+- Remove a task
 ```
-Eliminar una tarea
-
 DELETE http://localhost:8080/tasks/{taskId}
 ```

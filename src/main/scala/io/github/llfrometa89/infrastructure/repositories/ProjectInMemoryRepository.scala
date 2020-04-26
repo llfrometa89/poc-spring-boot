@@ -14,4 +14,18 @@ class ProjectInMemoryRepository[F[_]: Sync] extends ProjectRepository[F] {
     Sync[F].pure(project)
   }
 
+  def update(project: Project): F[Project] = {
+    projects = project :: projects.filter(_.id != project.id)
+    Sync[F].pure(project)
+  }
+
+  def remove(projectId: String): F[Unit] = {
+    projects = projects.filter(_.id != projectId)
+    Sync[F].unit
+  }
+
+  def findAll: F[List[Project]] = Sync[F].pure(projects)
+
+  def findById(projectId: String): F[Option[Project]] =
+    Sync[F].pure(projects.find(_.id == projectId))
 }
