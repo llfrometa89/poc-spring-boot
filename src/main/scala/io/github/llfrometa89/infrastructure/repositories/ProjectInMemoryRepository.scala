@@ -19,8 +19,8 @@ class ProjectInMemoryRepository[F[_]: Sync] extends ProjectRepository[F] {
     Sync[F].pure(project)
   }
 
-  def remove(projectId: String): F[Unit] = {
-    projects = projects.filter(_.id != projectId)
+  def remove(project: Project): F[Unit] = {
+    projects = projects.filter(_.id != project.id)
     Sync[F].unit
   }
 

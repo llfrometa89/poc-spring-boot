@@ -24,7 +24,7 @@ class ProjectController(projectService: ProjectService[IO]) {
   def update(@PathVariable projectId: String, @RequestBody data: UpdateProjectDTO): ProjectDTO =
     projectService.update(projectId, data).unsafeRunSync()
 
-  @DeleteMapping(value = Array("/projects/{projectId}"))
+  @DeleteMapping(value = Array("/{projectId}"))
   def remove(@PathVariable projectId: String): Unit =
     projectService.remove(projectId).unsafeRunSync()
 

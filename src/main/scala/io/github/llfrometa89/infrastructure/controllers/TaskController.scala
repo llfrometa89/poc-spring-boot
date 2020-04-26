@@ -1,16 +1,17 @@
-//package io.github.llfrometa89
+//package io.github.llfrometa89.infrastructure.controllers
 //
 //import java.util.{Optional, UUID}
 //
-//import io.github.llfrometa89.MemoryData._
+//import io.github.llfrometa89.application.dtos.TaskDTO
 //import org.springframework.web.bind.annotation._
+//
 //import scala.jdk.CollectionConverters._
 //
 //@RestController
 //class TaskController {
 //
 //  @PostMapping(value = Array("/projects/{projectId}/tasks"))
-//  def create(@PathVariable projectId: String, @RequestBody data: CreateTaskParameter): Optional[ProjectDTO] = {
+//  def create(@PathVariable projectId: String, @RequestBody data: CreateTaskParameter): TaskDTO = {
 //    projects.find(_.id == projectId) match {
 //      case Some(project) =>
 //        val newTask    = TaskDTO(UUID.randomUUID().toString, projectId, data.name, data.checked)

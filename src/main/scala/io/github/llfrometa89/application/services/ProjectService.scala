@@ -17,12 +17,18 @@ class ProjectService[F[_]: Sync](projectRepository: ProjectRepository[F]) {
 
   def update(projectId: String, data: UpdateProjectDTO): F[ProjectDTO] =
     for {
-      maybeProject   <- projectRepository.findById(projectId)
-      project        <- maybeProject.liftTo[F](ProjectNotFound(projectId))
-      projectUpdated <- projectRepository.update(project)
+      maybeProject    <- projectRepository.findById(projectId)
+      project         <- maybeProject.liftTo[F](ProjectNotFound(projectId))
+      projectToUpdate <- Sync[F].pure(project.copy(name = data.name, priority = data.priority))
+      projectUpdated  <- projectRepository.update(projectToUpdate)
     } yield ProjectConverter.toDTO(projectUpdated)
 
-  def remove(projectId: String): F[Unit] = projectRepository.remove(projectId)
+  def remove(projectId: String): F[Unit] =
+    for {
+      maybeProject <- projectRepository.findById(projectId)
+      project      <- maybeProject.liftTo[F](ProjectNotFound(projectId))
+      _            <- projectRepository.remove(project)
+    } yield ()
 
   def findAll: F[List[ProjectDTO]] =
     for {
