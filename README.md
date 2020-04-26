@@ -1,7 +1,7 @@
 # poc-spring-boot
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aba7bc8bb60b4d0386dbaa85fa071573)](https://www.codacy.com/manual/llfrometa89/poc-spring-boot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=llfrometa89/poc-spring-boot&amp;utm_campaign=Badge_Grade)
 
-**poc-spring-boot** is a basic example to test many features of Spring Boot library. This example is to manage projects and tasks.
+**poc-spring-boot** is a basic example(Proof of Concept) to test many features of Spring Boot library. This example is to manage projects and tasks.
 
 ### Requirements
 You need to have a configured environment to run a scala project
