@@ -1,4 +1,4 @@
-package io.github.llfrometa89.domain
+package io.github.llfrometa89.domain.models
 
 case class Task(
     id: String,

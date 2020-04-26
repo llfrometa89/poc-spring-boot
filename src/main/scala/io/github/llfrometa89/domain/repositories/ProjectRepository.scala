@@ -1,6 +1,6 @@
 package io.github.llfrometa89.domain.repositories
 
-import io.github.llfrometa89.domain.Project
+import io.github.llfrometa89.domain.models.Project
 
 trait ProjectRepository[F[_]] {
 

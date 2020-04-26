@@ -1,7 +1,7 @@
 package io.github.llfrometa89.application.converters
 
 import io.github.llfrometa89.application.dtos.TaskDTO
-import io.github.llfrometa89.domain.Task
+import io.github.llfrometa89.domain.models.Task
 
 object TaskConverter {
 
