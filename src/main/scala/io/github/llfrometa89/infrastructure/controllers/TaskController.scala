@@ -1,49 +1,35 @@
-//package io.github.llfrometa89.infrastructure.controllers
-//
-//import java.util.{Optional, UUID}
-//
-//import io.github.llfrometa89.application.dtos.TaskDTO
-//import org.springframework.web.bind.annotation._
-//
-//import scala.jdk.CollectionConverters._
-//
-//@RestController
-//class TaskController {
-//
-//  @PostMapping(value = Array("/projects/{projectId}/tasks"))
-//  def create(@PathVariable projectId: String, @RequestBody data: CreateTaskParameter): TaskDTO = {
-//    projects.find(_.id == projectId) match {
-//      case Some(project) =>
-//        val newTask    = TaskDTO(UUID.randomUUID().toString, projectId, data.name, data.checked)
-//        val newProject = project.withTask(newTask)
-//        projects = newProject :: projects.filter(_.id != projectId)
-//        Optional.of(newProject)
-//      case _ => Optional.ofNullable(null)
-//    }
-//  }
-//
-//  @PutMapping(value = Array("/tasks/{taskId}"))
-//  def update(@PathVariable taskId: String, @RequestBody data: UpdateTaskParameter): Optional[ProjectDTO] = {
-//    val tasks = projects.flatMap(_.tasks.asScala.toList)
-//    tasks.find(_.id == taskId) match {
-//      case Some(task) =>
-//        val projectId  = task.projectId
-//        val project    = projects.find(_.id == task.projectId).get //TODO .get of Option is for testing only: do not use this operation without checking that there is actually a Some Object
-//        val newTask    = TaskDTO(task.id, task.projectId, data.name, data.checked)
-//        val newProject = project.withTask(newTask)
-//        projects = newProject :: projects.filter(_.id != projectId)
-//        Optional.of(newProject)
-//      case _ => Optional.ofNullable(null)
-//    }
-//  }
-//
-//  @DeleteMapping(value = Array("/tasks/{taskId}"))
-//  def delete(@PathVariable taskId: String): java.util.List[ProjectDTO] = {
-//    println(s"...........taskId = $taskId")
-//    projects = projects.map(project =>
-//      ProjectDTO(project.id, project.name, project.priority, project.tasks.asScala.toList.filter(_.id != taskId).asJava)
-//    )
-//    projects.asJava
-//  }
-//
-//}
+package io.github.llfrometa89.infrastructure.controllers
+
+import cats.effect.IO
+import io.github.llfrometa89.application.dtos.{CreateTaskDTO, TaskDTO, UpdateTaskDTO}
+import io.github.llfrometa89.application.services.TaskService
+import org.springframework.web.bind.annotation._
+
+@RestController
+class TaskController(taskService: TaskService[IO]) {
+
+  @PostMapping(value = Array("api/projects/{projectId}/tasks"))
+  def create(@PathVariable projectId: String, @RequestBody data: CreateTaskDTO): TaskDTO =
+    taskService.add(projectId, data).unsafeRunSync()
+
+  @PutMapping(value = Array("api/tasks/{taskId}"))
+  def update(@PathVariable taskId: String, @RequestBody data: UpdateTaskDTO): TaskDTO =
+    taskService.update(taskId, data).unsafeRunSync()
+
+  @DeleteMapping(value = Array("api/tasks/{taskId}"))
+  def remove(@PathVariable taskId: String): Unit =
+    taskService.remove(taskId).unsafeRunSync()
+
+  @GetMapping(value = Array("api/tasks"))
+  def findAll(): Unit =
+    taskService.findAll.unsafeRunSync()
+
+  @GetMapping(value = Array("api/tasks/{taskId}"))
+  def findById(@PathVariable taskId: String): Unit =
+    taskService.findById(taskId).unsafeRunSync()
+
+  @PutMapping(value = Array("api/tasks/{taskId}/toggle"))
+  def toggle(@PathVariable taskId: String): Unit =
+    taskService.toggle(taskId).unsafeRunSync()
+
+}
