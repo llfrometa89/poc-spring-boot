@@ -1,8 +1,7 @@
-name := "testing_spring_boot"
+name := "pco-spring-boot"
 
-version := "0.1"
+version := "1.0.0"
 
-scalaVersion := "2.12.6"
+scalaVersion := "2.13.2"
 
-//libraryDependencies += "org.springframework.boot" % "spring-boot" % "2.0.4.RELEASE"
 libraryDependencies += "org.springframework.boot" % "spring-boot-starter-web" % "2.0.4.RELEASE"
