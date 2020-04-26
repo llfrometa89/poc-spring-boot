@@ -19,7 +19,7 @@ $ sbt run
 - Add a project
 
 ```
-POST http://localhost:8080/projects
+POST http://localhost:8000/api/projects
 {
 	"name":"MyProject4",
 	"priority":4
@@ -29,7 +29,7 @@ POST http://localhost:8080/projects
 
 - Update a project
 ```
-PUT http://localhost:8080/projects/{projectId}
+PUT http://localhost:8000/api/projects/{projectId}
 {
 	"name":"MyProjectNewName",
 	"priority":6
@@ -37,24 +37,24 @@ PUT http://localhost:8080/projects/{projectId}
 ```
 - Get all projects
 ```
-GET http://localhost:8080/projects
+GET http://localhost:8000/api/projects
 ```
 
 - Get a project by identifier
 ```
-GET http://localhost:8080/projects/{projectId}
+GET http://localhost:8000/api/projects/{projectId}
 ```
 
 - Remove a project by identifier
 ```
-DELETE http://localhost:8080/projects/{projectId}
+DELETE http://localhost:8000/api/projects/{projectId}
 ```
 
 #### Tasks
 
 - Add a task inside a project
 ```
-PUT http://localhost:8080/projects/{projectId}/tasks
+PUT http://localhost:8000/api/projects/{projectId}/tasks
 {
 	"name":"MyTask1",
 	"checked":true
@@ -62,7 +62,7 @@ PUT http://localhost:8080/projects/{projectId}/tasks
 ```
 - Update a task
 ```
-PUT http://localhost:8080/tasks/{taskId}
+PUT http://localhost:8000/api/tasks/{taskId}
 {
 	"name":"MyTask3",
 	"checked":true
@@ -70,5 +70,5 @@ PUT http://localhost:8080/tasks/{taskId}
 ```
 - Remove a task
 ```
-DELETE http://localhost:8080/tasks/{taskId}
+DELETE http://localhost:8000/api/tasks/{taskId}
 ```

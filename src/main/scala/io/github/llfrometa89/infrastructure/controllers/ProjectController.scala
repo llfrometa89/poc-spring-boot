@@ -13,10 +13,10 @@ class ProjectController(projectService: ProjectService[IO]) {
   def create(@RequestBody data: CreateProjectDTO): ProjectDTO =
     projectService.add(data).unsafeRunSync()
 
-  @RequestMapping(method = Array(RequestMethod.GET))
+  @GetMapping
   def getAll: List[ProjectDTO] = projectService.findAll.unsafeRunSync()
 
-  @RequestMapping(value = Array("/{projectId}"))
+  @GetMapping(value = Array("/{projectId}"))
   def getById(@PathVariable projectId: String): ProjectDTO =
     projectService.findById(projectId).unsafeRunSync()
 
