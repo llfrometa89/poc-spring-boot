@@ -24,6 +24,7 @@ libraryDependencies ++= Seq(
   Libraries.cats,
   Libraries.catsEffect,
   Libraries.logbackClassic,
+  Libraries.jacksonScala,
   Libraries.scalaTest
 )
 
