@@ -1,4 +1,5 @@
 # poc-spring-boot
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aba7bc8bb60b4d0386dbaa85fa071573)](https://www.codacy.com/manual/llfrometa89/poc-spring-boot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=llfrometa89/poc-spring-boot&amp;utm_campaign=Badge_Grade)
 
 Ejemplo básico de un projecto con spring_boot. Tenemos los recursos Proyecto y Tarea. Tarea es un recurso hijo de Proyecto.
 
