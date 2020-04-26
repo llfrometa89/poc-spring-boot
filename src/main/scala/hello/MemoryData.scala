@@ -20,10 +20,12 @@ object MemoryData {
 
   //DTO
   //TODO: Only for testing library
-  case class ProjectDTO(@BeanProperty var id: String,
-                        @BeanProperty var name: String,
-                        @BeanProperty var priority: Int,
-                        @BeanProperty var tasks: java.util.List[TaskDTO]) {
+  case class ProjectDTO(
+      @BeanProperty var id: String,
+      @BeanProperty var name: String,
+      @BeanProperty var priority: Int,
+      @BeanProperty var tasks: java.util.List[TaskDTO]
+  ) {
 
     def withTask(task: TaskDTO): ProjectDTO = {
       this.tasks = (task :: tasks.asScala.toList).asJava
@@ -31,10 +33,12 @@ object MemoryData {
     }
   }
 
-  case class TaskDTO(@BeanProperty var id: String,
-                     @BeanProperty var projectId: String,
-                     @BeanProperty var name: String,
-                     @BeanProperty var checked: Boolean)
+  case class TaskDTO(
+      @BeanProperty var id: String,
+      @BeanProperty var projectId: String,
+      @BeanProperty var name: String,
+      @BeanProperty var checked: Boolean
+  )
 
   //Parameter
   //TODO: Only for testing library
