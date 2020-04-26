@@ -72,3 +72,17 @@ PUT http://localhost:8000/api/tasks/{taskId}
 ```
 DELETE http://localhost:8000/api/tasks/{taskId}
 ```
+- Get all tasks
+```
+GET http://localhost:8000/api/tasks
+```
+
+- Get a tasks by identifier
+```
+GET http://localhost:8000/api/tasks/{taskId}
+```
+
+- Toggle a task
+```
+GET http://localhost:8000/api/tasks/{taskId}/toggle
+```
