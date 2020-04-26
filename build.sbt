@@ -1,3 +1,5 @@
+import Dependencies._
+
 name := "pco-spring-boot"
 
 organization := "io.github.llfrometa89"
@@ -17,8 +19,13 @@ lazy val commonScalacOptions = Seq(
   "-Wnumeric-widen",
   "-Xlint:-unused"
 )
-
-libraryDependencies += "org.springframework.boot" % "spring-boot-starter-web" % "2.0.4.RELEASE"
+libraryDependencies ++= Seq(
+  Libraries.springBootStarterWeb,
+  Libraries.cats,
+  Libraries.catsEffect,
+  Libraries.logbackClassic,
+  Libraries.scalaTest
+)
 
 scalacOptions ++= commonScalacOptions
 
