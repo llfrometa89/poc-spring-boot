@@ -1,9 +1,8 @@
 package io.github.llfrometa89.application.converters
 
 import java.util.UUID
-
 import io.github.llfrometa89.application.dtos.{CreateProjectDTO, ProjectDTO, UpdateProjectDTO}
-import io.github.llfrometa89.domain.{Project, Task}
+import io.github.llfrometa89.domain.models.{Project, Task}
 
 object ProjectConverter {
 

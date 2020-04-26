@@ -4,7 +4,7 @@ import cats.effect.Sync
 import cats.implicits._
 import io.github.llfrometa89.application.converters.ProjectConverter
 import io.github.llfrometa89.application.dtos.{CreateProjectDTO, ProjectDTO, UpdateProjectDTO}
-import io.github.llfrometa89.domain.Project.ProjectNotFound
+import io.github.llfrometa89.domain.models.Project.ProjectNotFound
 import io.github.llfrometa89.domain.repositories.ProjectRepository
 
 class ProjectService[F[_]: Sync](projectRepository: ProjectRepository[F]) {
