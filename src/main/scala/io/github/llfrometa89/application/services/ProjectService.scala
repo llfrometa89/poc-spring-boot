@@ -7,13 +7,13 @@ import io.github.llfrometa89.application.dtos.{CreateProjectDTO, ProjectDTO, Upd
 import io.github.llfrometa89.domain.models.Project.ProjectNotFound
 import io.github.llfrometa89.domain.repositories.ProjectRepository
 
-class ProjectService[F[_]: Sync](projectRepository: ProjectRepository[F]) {
+class ProjectService[F[_]: Sync](projectRepository: ProjectRepository[F], projectConverter: ProjectConverter) {
 
   def add(data: CreateProjectDTO): F[ProjectDTO] =
     for {
-      project      <- Sync[F].pure(ProjectConverter.toModel(data))
+      project      <- Sync[F].pure(projectConverter.toModel(data))
       projectSaved <- projectRepository.add(project)
-    } yield ProjectConverter.toDTO(projectSaved)
+    } yield projectConverter.toDTO(projectSaved)
 
   def update(projectId: String, data: UpdateProjectDTO): F[ProjectDTO] =
     for {
@@ -21,7 +21,7 @@ class ProjectService[F[_]: Sync](projectRepository: ProjectRepository[F]) {
       project         <- maybeProject.liftTo[F](ProjectNotFound(projectId))
       projectToUpdate <- Sync[F].pure(project.copy(name = data.name, priority = data.priority))
       projectUpdated  <- projectRepository.update(projectToUpdate)
-    } yield ProjectConverter.toDTO(projectUpdated)
+    } yield projectConverter.toDTO(projectUpdated)
 
   def remove(projectId: String): F[Unit] =
     for {
@@ -33,12 +33,12 @@ class ProjectService[F[_]: Sync](projectRepository: ProjectRepository[F]) {
   def findAll: F[List[ProjectDTO]] =
     for {
       projects <- projectRepository.findAll
-    } yield projects.map(ProjectConverter.toDTO)
+    } yield projects.map(projectConverter.toDTO)
 
   def findById(projectId: String): F[ProjectDTO] =
     for {
       maybeProject <- projectRepository.findById(projectId)
       project      <- maybeProject.liftTo[F](ProjectNotFound(projectId))
-    } yield ProjectConverter.toDTO(project)
+    } yield projectConverter.toDTO(project)
 
 }
