@@ -14,7 +14,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "build.sbt" }}-{{ checksum "./project/build.properties" }}-{{ checksum "./project/plugins.sbt" }}-{{ checksum "./project/Dependencies.scala" }}
+            - v1-dependencies-{{ checksum "build.sbt" }}-{{ checksum "./project/build.properties" }}-{{ checksum "./project/plugins.sbt" }}
       - run:
           name: Check that everything is formatted properly
           command: ./sbt scalafmtSbtCheck scalafmtCheckAll
@@ -36,7 +36,7 @@ jobs:
             - ../.ivy2/cache
             - ../.sbt/boot/
             - ../.sbt/launchers
-          key: v1-dependencies-{{ checksum "build.sbt" }}-{{ checksum "./project/build.properties" }}-{{ checksum "./project/plugins.sbt" }}-{{ checksum "./project/Dependencies.scala" }}
+          key: v1-dependencies-{{ checksum "build.sbt" }}-{{ checksum "./project/build.properties" }}-{{ checksum "./project/plugins.sbt" }}
       - persist_to_workspace:
           root: .
           paths:
